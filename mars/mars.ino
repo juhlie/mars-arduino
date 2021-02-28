@@ -12,7 +12,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, /* clock=*/ SCL, /* data=*/ SD
 
 
 /**
-   Pin locations
+   pin locations
 */
 
 #define LED 4
@@ -20,19 +20,18 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, /* clock=*/ SCL, /* data=*/ SD
 #define BUTTON 6
 
 /**
-   State variables
+   state varaibles
 */
 
 char ROVER_X = 8; // perseverance initial x-value
 char ROVER_Y = -55; // perseverance initial y-value
 
-
 /**
-   Contents of .xbm files (image data)
-   Image credits to:
+   contents of .xbm files (image data)
+   image credits to:
       - https://solarsystem.nasa.gov/news/1573/color-your-universe/
       - https://astrobiology.nasa.gov/resources/coloring/?fbclid=IwAR1B2zrFZ3jS9w592Rm6fQculptPDsIihxEWYlhIzWM2VOI0N2atYrHKKZQ
-   Big thanks to sandhansblog https://sandhansblog.wordpress.com/2017/04/16/interfacing-displaying-a-custom-graphic-on-an-0-96-i2c-oled/
+   big thanks to sandhansblog https://sandhansblog.wordpress.com/2017/04/16/interfacing-displaying-a-custom-graphic-on-an-0-96-i2c-oled/
 */
 
 #define big_mars_width 64
@@ -494,6 +493,8 @@ void exploreMars() {
 
 void goHome() {
   drawShortText("HOME? ALREADY?", 5);
+
+  // liftoff animation
   ROVER_X = 8;
   while (ROVER_Y > -55) {
     u8g2.clearBuffer();
@@ -527,9 +528,9 @@ void goHome() {
 void tellLore() {
   // set up plotline
   drawLongText("ONCE UPON A", "TIME, ON PLANET", "MARS...");
-  playMarsAnimation(); // show mars!
+  playMarsAnimation();
   drawLongText("...A MYSTERIOUS", "CREATURE FELL", "FROM THE SKY.");
-  playPerseveranceSequence(); // perseverance landing
+  playPerseveranceSequence();
   drawLongText("YOU ARE THE", "PERSEVERANCE", "ROVER.");
   drawLongText("PRESS BUTTON", "FOR INFO", "", 2000);
 }
@@ -581,5 +582,4 @@ void loop() {
   do {
     drawPerseverance();
   } while (u8g2.nextPage());
-
 }
